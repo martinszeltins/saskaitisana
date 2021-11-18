@@ -1,0 +1,74 @@
+version: '3.7'
+services:
+
+  # Node for client app
+  saskaitisana-client-node:
+    container_name: saskaitisana-client-node
+    build: docker/client-node
+    restart: unless-stopped
+    stdin_open: true                # Needed for HMR
+    environment:
+      - CHOKIDAR_USEPOLLING=true    # Needed for HMR
+    ports:
+      - 23279:5000
+    volumes:
+      - ./app/client:/var/www
+    networks:
+      - app-network
+
+
+  # Nginx for server app
+  saskaitisana-server-nginx:
+    container_name: saskaitisana-server-nginx
+    image: nginx:1.19-alpine
+    restart: unless-stopped
+    ports:
+      - 25044:80
+    volumes:
+      - ./app/server:/var/www
+      - ./docker/server-nginx/etc/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - saskaitisana-server-php
+      - saskaitisana-server-mysql
+    networks:
+      - app-network
+
+
+  # PHP for server app
+  saskaitisana-server-php:
+    build: docker/server-php
+    container_name: saskaitisana-server-php
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: php
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./app/server:/var/www
+    networks:
+      - app-network
+    depends_on:
+      - saskaitisana-server-mysql
+
+
+  # MySQL for server app
+  saskaitisana-server-mysql:
+    image: mysql:8.0
+    container_name: saskaitisana-server-mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "11656:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: YUvaq_76.NV6uxEN_yy-aNn7+_PU
+      MYSQL_DATABASE: saskaitisana
+    networks:
+      - app-network
+
+
+# Networks
+networks:
+  app-network:
+    driver: bridge
