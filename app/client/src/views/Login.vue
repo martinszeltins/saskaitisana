@@ -40,6 +40,10 @@
                     </div>
 
                     <div class="flex flex-col gap-4 mt-6">
+                        <div v-if="authError" class="bg-red-100/50 rounded p-2 text-center text-gray-800">
+                            {{ authError }}
+                        </div>
+
                         <input
                             tabindex="3"
                             type="text"
@@ -86,10 +90,11 @@
     import { useRegister } from '/@/app/auth/register.js'
     import { useLogin } from '/@/app/auth/login.js'
 
-    let username = $ref('')
-    let password = $ref('')
-    let authType = $ref('login')
-    let isLoading = $ref(false)
+    let username    = $ref('')
+    let password    = $ref('')
+    let authType    = $ref('login')
+    let isLoading   = $ref(false)
+    let authError   = $ref('')
 
     const { register }  = useRegister()
     const { login }     = useLogin()
@@ -106,8 +111,17 @@
     const onRegisterClick = async () => {
         isLoading = true
 
-        await register(username, password)
-        await login(username, password)
+        try {
+            await register(username, password)
+
+            try {
+                await login(username, password)
+            } catch (error) {
+                authError = error.response.data.error
+            }
+        } catch (error) {
+            authError = error.response.data.error
+        }
 
         isLoading = false
     }
