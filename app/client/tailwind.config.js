@@ -10,7 +10,8 @@ module.exports = {
             },
 
             backgroundImage: {
-                "blue-gradient": "linear-gradient(90deg, rgba(51,152,253,1) 0%, rgba(92,205,244,1) 100%);"
+                "blue-gradient": "linear-gradient(90deg, rgba(51,152,253,1) 0%, rgba(92,205,244,1) 100%);",
+                "math": "url(/src/assets/img/bg-math.jpg)",
             },
 
             boxShadow: {
