@@ -1,1 +1,5 @@
+/* Components */
+@import './components/circle-spinner.css';
+
+/* Utilities */
 @import './utilities/tailwind.css';
