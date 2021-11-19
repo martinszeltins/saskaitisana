@@ -15,7 +15,8 @@ module.exports = {
             },
 
             boxShadow: {
-                "inset": "#00000026 4px 4px 17px 0px inset"
+                "inset": "#00000026 4px 4px 17px 0px inset",
+                "inset-sm": "#00000017 4px 4px 10px 0px inset",
             },
         },
     },
