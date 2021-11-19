@@ -62,6 +62,7 @@
 
                         <div
                             v-if="authType == 'login'"
+                            @click="onLoginClick"
                             tabindex="5"
                             class="flex justify-center items-center font-medium bg-primary text-white rounded-md text-center px-4 h-[52px] py-3 cursor-default hover:bg-primary/90 transition active:hover:bg-blue-500 active:hover:shadow-inset select-none text-xl">
 
@@ -119,6 +120,18 @@
             } catch (error) {
                 authError = error.response.data.error
             }
+        } catch (error) {
+            authError = error.response.data.error
+        }
+
+        isLoading = false
+    }
+
+    const onLoginClick = async () => {
+        isLoading = true
+
+        try {
+            await login(username, password)
         } catch (error) {
             authError = error.response.data.error
         }
