@@ -56,13 +56,14 @@
                         />
 
                         <div class="ml-4 text-2xl">
-                            2946
+                            {{ time }}
                         </div>
                     </div>
                 </div>
 
                 <div
-                    class="inline-block w-[165px] bg-white text-gray-700 rounded-xl py-4 px-6 border-2 border-gray-300 transition cursor-default select-none">
+                    class="inline-block w-[165px] bg-white text-gray-700 rounded-xl py-4 px-6 border-2 border-gray-300 transition cursor-default select-none"
+                    :class="{ 'pulse-points': isGameEnded }">
 
                     <div class="flex items-center">
                         <img
@@ -71,7 +72,7 @@
                         />
 
                         <div class="ml-4 text-2xl">
-                            550
+                            {{ score }}
                         </div>
                     </div>
                 </div>
@@ -86,26 +87,30 @@
                         />
 
                         <div class="ml-4 text-2xl">
-                            4
+                            {{ level }}
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="text-6xl font-semibold text-gray-700 tracking-widest mt-10 ml-10 select-none">
-                125 + 786
+            <div v-if="!isGameEnded" class="text-6xl font-semibold text-gray-700 tracking-widest mt-10 ml-10 select-none">
+                {{ numberOne }} + {{ numberTwo }} = {{ answer }}
+            </div>
+
+            <div v-if="isGameEnded" class="shake text-6xl font-semibold text-gray-700 tracking-widest mt-10 ml-10 select-none">
+                Laiks beidzies!
             </div>
 
             <div class="grid grid-cols-4 grid-rows-4 w-[600px] mt-20 gap-[1px]">
-                <div tabindex="1" class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
+                <div @click="addNumberToAnswer('7')" tabindex="1" class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
                     7
                 </div>
 
-                <div class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
+                <div @click="addNumberToAnswer('8')" class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
                     8
                 </div>
 
-                <div class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
+                <div @click="addNumberToAnswer('9')" class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
                     9
                 </div>
 
@@ -113,15 +118,15 @@
 
                 </div>
 
-                <div class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
+                <div @click="addNumberToAnswer('4')" class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
                     4
                 </div>
 
-                <div class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
+                <div @click="addNumberToAnswer('5')" class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
                     5
                 </div>
 
-                <div class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
+                <div @click="addNumberToAnswer('6')" class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
                     6
                 </div>
 
@@ -129,15 +134,15 @@
 
                 </div>
 
-                <div class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
+                <div @click="addNumberToAnswer('1')" class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
                     1
                 </div>
 
-                <div class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
+                <div @click="addNumberToAnswer('2')" class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
                     2
                 </div>
 
-                <div class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
+                <div @click="addNumberToAnswer('3')" class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
                     3
                 </div>
 
@@ -145,28 +150,152 @@
 
                 </div>
 
-                <div class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
+                <div @click="addNumberToAnswer('0')" class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
                     0
                 </div>
 
-                <div class="bg-[#329cfd] col-span-2 text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
+                <div @click="submitAnswer" class="bg-[#329cfd] col-span-2 text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
                     Saskaitīt
                 </div>
 
-                <div class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
+                <div @click="resetAnswer" class="bg-[#329cfd] text-white flex justify-center items-center h-[130px] text-3xl font-medium shadow rounded select-none cursor-default active:hover:shadow-inset-sm active:hover:bg-[#3294ef]">
                     Dzēst
                 </div>
             </div>
         </div>
     </div>
+
+    <img
+        v-if="sadEmojiVisible"
+        class="absolute-center-y w-56 left-[700px]"
+        src="/src/assets/img/sad-emoji.webp"
+    />
 </template>
 
 <script setup>
     import GameHeader from '/@/components/GameHeader.vue'
+    import { useSaveScore } from '/@/app/saveScore'
 
     let isGameStarted = $ref(false)
+    let isGameEnded = $ref(false)
+    let time = $ref(0)
+    let score = $ref(0)
+    let level = $ref(1)
+    let timerInterval = $ref(null)
+    let numberOne = $ref(0)
+    let numberTwo = $ref(0)
+    let answer = $ref('')
+    let sadEmojiVisible = $ref(false)
+
+    const { saveScore } = useSaveScore()
 
     const startGame = () => {
+        time = 3000
+        score = 0
+        level = 1
+
+        generateRandomNumbers()
+
+        timerInterval = setInterval(() => {
+            time -= 100
+
+            increaseLevelAsTimeRunsOut()
+            endGameWhenTimeRunsOut()
+        }, 100)
+
         isGameStarted = true
+    }
+
+    const generateRandomNumbers = () => {
+        let min
+        let max
+
+        if (level == 1) {
+            min = 1
+            max = 5
+        } else if (level == 2) {
+            min = 6
+            max = 12
+        } else if (level == 3) {
+            min = 10
+            max = 50
+        } else if (level == 4) {
+            min = 100
+            max = 500
+        } else if (level == 5) {
+            min = 1000
+            max = 5000
+        }
+
+        numberOne = Math.floor(Math.random() * (max - min + 1)) + min
+        numberTwo = Math.floor(Math.random() * (max - min + 1)) + min
+    }
+
+    const increaseLevelAsTimeRunsOut = () => {
+        if (time == 2500 || time == 2000 || time == 1500 || time == 1000) {
+            level += 1
+        }
+    }
+
+    const addNumberToAnswer = number => {
+        answer = answer + number
+    }
+
+    const resetAnswer = () => {
+        answer = ''
+    }
+
+    const submitAnswer = () => {
+        if (isAnswerCorrect() === true) {
+            increaseScore()
+        } else {
+            showSadEmoji()
+        }
+
+        resetAnswer()
+        generateRandomNumbers()
+    }
+
+    const isAnswerCorrect = () => {
+        if (numberOne + numberTwo === parseInt(answer)) {
+            return true
+        }
+
+        return false
+    }
+
+    const increaseScore = () => {
+        if (level === 1) {
+            score += 11
+        } else if (level === 2) {
+            score += 15
+        } else if (level === 3) {
+            score += 20
+        } else if (level === 4) {
+            score += 25
+        } else if (level === 5) {
+            score += 50
+        }
+    }
+
+    const showSadEmoji = () => {
+        sadEmojiVisible = true
+
+        setTimeout(() => {
+            sadEmojiVisible = false
+        }, 1000)
+    }
+
+    const endGameWhenTimeRunsOut = () => {
+        if (time === 0) {
+            clearInterval(timerInterval)
+            isGameEnded = true
+
+            setTimeout(async () => {
+                await saveScore(score)
+
+
+            }, 2000)
+        }
     }
 </script>

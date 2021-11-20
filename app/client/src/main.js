@@ -4,6 +4,12 @@ import routes from '/@/routes.js'
 import axios from 'axios'
 import '/@/assets/css/app.css'
 
+axios.defaults.headers.common = {
+    'Content-Type':     'application/json',
+    'accept':           'application/json',
+    'X-Requested-With': 'XMLHttpRequest'
+}
+
 window.axios = axios
 
 const app = createApp(App)
