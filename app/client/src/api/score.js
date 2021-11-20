@@ -13,4 +13,14 @@ export default class Score
             },
         })
     }
+
+    static get() {
+        const token = JSON.parse(localStorage['saskaitisana_user']).access_token
+
+        return axios.get(`${env('VITE_SERVER_URL')}/api/score`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+        })
+    }
 }

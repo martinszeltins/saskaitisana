@@ -23,6 +23,7 @@
                 </div>
 
                 <div
+                    @click="openResults"
                     tabindex="2"
                     class="inline-block bg-white text-gray-700 rounded-xl py-4 px-6 border-2 border-gray-300 hover:border-gray-400 transition cursor-default select-none active:hover:shadow-inset-sm">
 
@@ -173,8 +174,9 @@
 </template>
 
 <script setup>
-    import GameHeader from '/@/components/GameHeader.vue'
+    import router from '/@/routes.js'
     import { useSaveScore } from '/@/app/saveScore'
+    import GameHeader from '/@/components/GameHeader.vue'
 
     let isGameStarted = $ref(false)
     let isGameEnded = $ref(false)
@@ -197,7 +199,7 @@
         generateRandomNumbers()
 
         timerInterval = setInterval(() => {
-            time -= 100
+            time -= 1
 
             increaseLevelAsTimeRunsOut()
             endGameWhenTimeRunsOut()
@@ -294,8 +296,16 @@
             setTimeout(async () => {
                 await saveScore(score)
 
-
+                router.push({
+                    name: 'scores'
+                })
             }, 2000)
         }
+    }
+
+    const openResults = () => {
+        router.push({
+            name: 'scores'
+        })
     }
 </script>

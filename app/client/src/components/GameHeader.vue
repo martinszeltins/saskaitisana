@@ -6,6 +6,18 @@
             </div>
 
             <div class="flex items-center">
+                <div
+                    @click="logout"
+                    tabindex="1"
+                    class="inline-block mr-4 bg-white text-gray-700 rounded-full py-1 px-6 border-2 border-gray-300 hover:border-gray-400 transition cursor-default select-none active:hover:shadow-inset-sm">
+
+                    <div class="flex items-center">
+                        <div class="text-lg">
+                            Iziet
+                        </div>
+                    </div>
+                </div>
+
                 <div class="text-white text-2xl mr-4 text-shadow-sm">
                     {{ username }}
                 </div>
@@ -23,6 +35,8 @@
 </template>
 
 <script setup>
+    import router from '/@/routes.js'
+
     let username = $ref('')
 
     const getUser = () => {
@@ -32,4 +46,12 @@
     }
 
     username = getUser().username
+
+    const logout = () => {
+        localStorage.removeItem('saskaitisana_user')
+
+        router.push({
+            name: 'login'
+        })
+    }
 </script>

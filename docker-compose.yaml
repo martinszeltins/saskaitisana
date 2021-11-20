@@ -61,6 +61,8 @@ services:
     tty: true
     ports:
       - "11656:3306"
+    volumes:
+      - dbdata:/var/lib/mysql/
     environment:
       MYSQL_ROOT_PASSWORD: YUvaq_76.NV6uxEN_yy-aNn7+_PU
       MYSQL_DATABASE: saskaitisana
@@ -72,3 +74,8 @@ services:
 networks:
   app-network:
     driver: bridge
+
+# Volumes
+volumes:
+  dbdata:
+    driver: local

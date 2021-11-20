@@ -45,6 +45,7 @@
                         </div>
 
                         <input
+                            @keyup.enter="doAuth"
                             tabindex="3"
                             type="text"
                             v-model="username"
@@ -53,6 +54,7 @@
                         />
 
                         <input
+                            @keyup.enter="doAuth"
                             tabindex="4"
                             type="password"
                             v-model="password"
@@ -137,6 +139,14 @@
         }
 
         isLoading = false
+    }
+
+    const doAuth = async () => {
+        if (authType == 'login') {
+            onLoginClick()
+        } else {
+            onRegisterClick()
+        }
     }
 
     onMounted(() => {

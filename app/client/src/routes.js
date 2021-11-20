@@ -1,6 +1,7 @@
 import auth from '/@/middleware/auth.js'
 import Index from "/@/views/Index.vue"
 import Login from "/@/views/Login.vue"
+import Scores from "/@/views/Scores.vue"
 import { createWebHistory, createRouter } from "vue-router"
 
 const routes = [
@@ -17,6 +18,12 @@ const routes = [
         path: "/login",
         name: "login",
         component: Login,
+    },
+
+    {
+        path: "/scores",
+        name: "scores",
+        component: Scores,
     },
 ]
 

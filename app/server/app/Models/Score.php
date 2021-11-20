@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Score extends Model
 {
@@ -15,4 +16,12 @@ class Score extends Model
      * @var array
      */
     protected $guarded = [];
+
+    /**
+     * Get the user associated with the score.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -9,5 +9,6 @@ Route::prefix('api')->group(function () {
     Route::post('login',    [LoginController::class, 'store']);
     Route::post('register', [RegisterController::class, 'store']);
 
+    Route::get('score',     [ScoreController::class, 'index']);
     Route::post('score',    [ScoreController::class, 'store']);
 });

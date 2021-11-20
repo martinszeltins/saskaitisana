@@ -7,7 +7,7 @@ export function useLogin() {
 
         localStorage.setItem('saskaitisana_user', JSON.stringify(data))
 
-        router.push({ name: 'index' })
+        location.href = '/'
     }
 
     return {
